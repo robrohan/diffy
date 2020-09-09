@@ -106,3 +106,5 @@ To run the examples, start a web server in this directory, click on the `example
 ## Where are the tests?
 
 It is important to note that Diffy is not what Movio considers "production ready code". We do quite a number of experiments and spikes while developing our products, and this is just one tool we use. Hopefully you find it useful, and pull requests are always welcome!
+
+.
