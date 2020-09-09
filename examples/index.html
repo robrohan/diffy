@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diffy</title>
+  <link rel="stylesheet" href="main.css">
+  <script src="../diffy.js"></script>
+</head>
+
+<body>
+  <h1>This is the index page.</h1>
+  <p>This text and the heading above wont change unless you do a page refresh.</p>
+  <p>This is because diffy is not monitoring these dom areas.</p>
+
+  <p class="one">
+    This is some information here. that will also be replaced
+  </p>
+
+  <div class="two">
+    <a href="page2.html">Click here to load this section.</a>
+  </div>
+
+  <a href="form.html">If you want a Form Example</a>
+
+  <script>
+    // Monitor and replace contents on these query selectors
+    Diffy.init([".one", ".two"]);
+
+    // on init
+    const fn = function () {
+      (function () { console.log("I am called after diffy binds."); })();
+    };
+
+    Diffy.rebind.push(fn);
+  </script>
+</body>
+
+</html>
