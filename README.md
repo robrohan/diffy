@@ -60,7 +60,7 @@ The action is intercepted, and the HTTP request is made by diffy and the next pa
 
 ```
 
-Diffy then replaces the section of the original page with the section from the new page (they must match). In our initial example, the contents in `class="one"` and `class="two"` will be replaced with the contents from the new page.
+Diffy then replaces the section of the original page with the section from the new page (they must match). In the initial example, the contents in `class="one"` and `class="two"` will be replaced with the contents from the new page.
 
 Additionally the history is rewritten so if the user bookmarks the new state (or clicks refresh on the browser), the second page is displayed.
 
@@ -105,6 +105,6 @@ To run the examples, start a web server in this directory, click on the `example
 
 ## Where are the tests?
 
-It is important to note that Diffy is not what Movio considers "production ready code". We do quite a number of experiments and spikes while developing our products, and this is just one tool we use. Hopefully you find it useful, and pull requests are always welcome!
+It is important to note that Diffy is not what one would consider "production ready code". We do quite a number of experiments and spikes while developing our products, and this is just one tool we use. Hopefully you find it useful, and pull requests are always welcome!
 
 .
