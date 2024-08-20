@@ -68,8 +68,8 @@ const Diffy = {};
     Diffy.replaceSelectors.forEach(function(sel) {
       const newFragment = t.content.querySelector(sel);
       const oldFragment = document.querySelector(sel);
-
-      oldFragment.innerHTML = newFragment.innerHTML;
+      if(newFragment && oldFragment)
+        oldFragment.innerHTML = newFragment.innerHTML;
     });
 
     history.pushState(t.innerHTML, "Diffy", url);
@@ -79,14 +79,18 @@ const Diffy = {};
     });
 
     if (Diffy.rebind.length) {
-      Diffy.rebind.forEach(function(f) {
+      const rbl = Diffy.rebind.length;
+      for(let i = 0; i < rbl; ++i) {
+        const f = Diffy.rebind[i];
         f();
-      });
+      }
     }
   };
 
   Diffy.inputsToFormPost = function(form) {
-    const inputs = form.querySelectorAll("input");
+    // TODO: this needs checkbox, radio, etc
+    const inputs = Array.from(form.querySelectorAll("input"));
+    inputs.push.apply(inputs, form.querySelectorAll("textarea"));
     const qs = [""];
     for (let q = 0; q < inputs.length; q++) {
       const nv = inputs[q];
@@ -97,18 +101,22 @@ const Diffy = {};
     return qs.join("");
   };
 
+  // Call this if you want to do a direct by hand
+  Diffy.urlHandler = function(link) {
+    fetch(link)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(html) {
+        Diffy.replaceContent(html, link);
+      });
+  }
+
   Diffy.aHandler = function(aTag) {
     return function(e) {
       e.preventDefault();
       const link = aTag.href;
-
-      fetch(link)
-        .then(function(response) {
-          return response.text();
-        })
-        .then(function(html) {
-          Diffy.replaceContent(html, link);
-        });
+      Diffy.urlHandler(link);
     };
   };
 
