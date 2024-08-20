@@ -39,16 +39,23 @@ const Diffy = {};
     const flen = forms.length;
     for (let x = 0; x < flen; x++) {
       const form = forms[x];
-      form.addEventListener("submit", Diffy.formHandler(form));
+      const ignore = !!form?.classList.contains('diffy-ignore');
+      if(!ignore) {
+        form.addEventListener("submit", Diffy.formHandler(form));
+      }
     }
   };
 
+  // Overwrite anchor tags
   // Overwrite anchor tags
   Diffy.rewriteAnchor = function(aTags) {
     const atlen = aTags.length;
     for (let x = 0; x < atlen; x++) {
       const tag = aTags[x];
-      tag.addEventListener("click", Diffy.aHandler(tag));
+      const ignore = !!tag?.classList.contains('diffy-ignore');
+      if(!ignore) {
+        tag.addEventListener("click", Diffy.aHandler(tag));
+      }
     }
   };
 
